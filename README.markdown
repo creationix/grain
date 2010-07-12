@@ -55,7 +55,75 @@ The module itself will also have a `helpers` object that gets mixed into every l
 
 ## Sample code
 
-There is no known compiler that fully implements this yet, but see some sample code at <http://gist.github.com/468889>
+Suppose this simple template language where `@foo` is the variable `foo` and `@bar()` calls the data provider `bar()` and inserts the result inline.
 
-More to come soon.
+I would require my compiler like this:
 
+    var compiler = require('./asyncCompiler');
+
+Now let's suppose this simple template:
+
+    var template = "Hello @planet, my name is @name() and I am @age() years old.";
+
+With this sample data:
+
+    var data = {
+      // Value
+      planet: "world",
+      // Async getter
+      name: function name(callback) {
+        process.nextTick(function () {
+          callback(null, "Tim Caswell");
+        });
+      },
+      // sync getter
+      age: function age() {
+        return 28;
+      }
+    };
+
+To compile the template it's simply:
+
+    var fn = compiler(template);
+
+And then to render it do:
+
+    fn(data, function (err, text) {
+      if (err) {
+        console.log("ERROR " + err.stack);
+        return;
+      }
+      console.log("OUTPUT " + text);
+    });
+
+Or to render with a stream:
+
+    var stream = new process.EventEmitter();
+    fn(data, stream);
+    stream.addListener('data', function (data) {
+      console.log("DATA " + JSON.stringify(data.toString()));
+    });
+    stream.addListener('end', function () {
+      console.log("END");
+    });
+    stream.addListener('error', function (err) {
+      console.log("ERROR " + err.stack);
+    });
+
+Also you can compile and render it in one shot:
+  
+    compiler(template, data, callback);
+
+If I wanted a helper that did partials, I would add it like this:
+
+    var fs = require('fs');
+    compiler.helpers = {
+      partial: function (filename, data, callback) {
+        fs.readFile(filename, function (err, text) {
+          if (err) { callback(err); return; }
+          compiler(text, data, callback);
+        });
+      }
+    }
+
+And then it would be available within the template as `partial()` without me having to pass it into the data hash every time.
