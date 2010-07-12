@@ -27,7 +27,7 @@ The module itself is a function that takes in template source code as text and r
     function compile(text) -> function fn(locals, callback|stream)
     module.exports = compile
 
-The returned function accepts two arguments, they are `locals` and then either a callback function or a stream instance.
+The returned function accepts two arguments, they are `locals` and then either a `callback` function or a `stream` instance.  The properties of `locals` are available within the template as local variables, usually using `with`.
 
 ### Callback
 
@@ -55,7 +55,7 @@ The module itself will also have a `helpers` object that gets mixed into every l
 
 ## Sample code
 
-There is no known compiler that fully implements this yet, but see some sample code at http://gist.github.com/468889
+There is no known compiler that fully implements this yet, but see some sample code at <http://gist.github.com/468889>
 
 More to come soon.
 
