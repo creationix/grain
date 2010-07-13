@@ -10,6 +10,8 @@ All template languages have 5 parts in common.
 
 Ok, maybe the last one isn't that common, but in a NodeJS world where nothing blocks it's required for many use cases.  Partial templates require usually that another external resource get loaded and compiled.  If this resource is loaded over some IO then it's an asynchronous operation.  Also it would be nice to be able to stream content to the browser as information is known.
 
+Grain is both a spec for interfaces between template languages and a helper library to help write compilers that follow the spec.  Included is a sample template language called `Corn` that implements the spec using `grain`.
+
 ## Inversion of control
 
 One way to handle the async nature of retrieving data is to pre-calculate all the data that's needed for a template to render, and then as the last step pass it to the template function which returns the output text in a single sync function call.  This works and is very simple from the point of view of the author of the template language, but it's a lot of burden on the person using the template language.
