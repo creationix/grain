@@ -1,0 +1,17 @@
+{
+  "name": "grain",
+  "description": "Grain is an async framework for node.js template languages",
+  "tags": ["stack", "template", "async"],
+  "version": "0.0.1",
+  "author": "Tim Caswell <tim@creationix.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/creationix/grain.git"
+  },
+  "bugs": "http://github.com/creationix/grain/issues",
+  "engines": ["node >= 0.2.0"],
+  "main": "grain.js",
+  "modules": {
+    "corn": "examples/corn.js"
+  }
+}

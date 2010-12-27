@@ -59,9 +59,9 @@ The module itself will also have a `helpers` object that gets mixed into every l
 
 Suppose this simple template language where `@foo` is the variable `foo` and `@bar()` calls the data provider `bar()` and inserts the result inline.
 
-I would require my compiler like this:
+I would require my compiler like this (corn is included as a sample):
 
-    var compiler = require('./asyncCompiler');
+    var compiler = require('grain/corn');
 
 Now let's suppose this simple template:
 
@@ -121,7 +121,7 @@ If I wanted a helper that did partials, I would add it like this:
     var fs = require('fs');
     compiler.helpers = {
       partial: function (filename, data, callback) {
-        fs.readFile(filename, function (err, text) {
+        fs.readFile(filename, 'utf8', function (err, text) {
           if (err) { callback(err); return; }
           compiler(text, data, callback);
         });

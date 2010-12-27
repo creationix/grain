@@ -19,12 +19,12 @@ function compile(locals, callback) {
       position++;
     }
     if (stream && pieces.length > 0) {
-      stream.emit('data', new Buffer(pieces.join("")));
+      stream.emit('data', pieces.join(""));
     }
 
     if (position === chunks.length) {
       if (callback) {
-        callback(null, new Buffer(chunks.join("")));
+        callback(null, chunks.join(""));
       }
       if (stream) {
         stream.emit('end');

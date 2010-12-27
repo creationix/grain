@@ -1,5 +1,4 @@
-var grain = require('../lib/grain');
-var Buffer = require('buffer').Buffer;
+var grain = require('../grain');
 
 module.exports = function compile(template, locals, callback) {
   var regex = /@([a-z$_][a-z0-9$_]*)\(([^\)]*)\)/g,
