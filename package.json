@@ -2,7 +2,7 @@
   "name": "grain",
   "description": "Grain is an async framework for node.js template languages",
   "tags": ["stack", "template", "async"],
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Tim Caswell <tim@creationix.com>",
   "repository": {
     "type": "git",
