@@ -31,9 +31,9 @@ function compile(locals, callback) {
       }
     }
   }
-  function execute(position, fn) {
+  function execute(position, args, fn) {
     try {
-      chunks[position] = fn(function (err, result) {
+      args.push(function (err, result) {
         if (err) { 
           if (stream) stream.emit('error', err);
           if (callback) callback(err);
@@ -42,6 +42,7 @@ function compile(locals, callback) {
         chunks[position] = result;
         check();
       });
+      chunks[position] = fn.apply(null, args);
     } catch (err) {
       if (stream) stream.emit('error', err);
       if (callback) callback(err);
@@ -52,7 +53,7 @@ function compile(locals, callback) {
     with(locals) {
       // INSERT GENERATED CODE HERE
     }
-  });
+  }.bind(locals));
 }
 
 // Prepare variables for quick code replacement
