@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/creationix/grain.png)](http://travis-ci.org/creationix/grain)
 # Grain Templating System
 
 All template languages have 5 parts in common.
